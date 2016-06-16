@@ -23,6 +23,7 @@ public class ScoreboardListeners implements Listener {
 
     @EventHandler
     public void onJoinFaction(PlayerJoinFactionEvent event) {
+        // for every player of the faction the player joined get the profile of them and update the tab colors
         for (Player player : event.getFaction().getOnlinePlayers()) {
             Profile profile = Profile.getByUuid(player.getUniqueId());
             profile.updateTab();
@@ -37,6 +38,7 @@ public class ScoreboardListeners implements Listener {
 
     @EventHandler
     public void onLeaveFaction(PlayerLeaveFactionEvent event) {
+        // Making a new HashSet and setting the max capacity of the faction the players left online players. example: 13 (online players)
         Set<Player> toLoop = new HashSet<>(event.getFaction().getOnlinePlayers());
         toLoop.add(event.getPlayer());
         for (Player player : toLoop) {
